@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TheBestTracker.UserInterface"
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800">
+
     <Grid  Background="LightSlateGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,63 +17,27 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBlock  Grid.Row="0" x:Name="RegPassText"  Text="What's your login(Admin)?" Background="LightSlateGray" Foreground="White"  FontSize="15" 
-                    HorizontalAlignment="Center" Margin="0" VerticalAlignment="Bottom"/>
+        <TextBlock  Grid.Row="0"   Text="Select new category name" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="0"
+                    HorizontalAlignment="Center" Margin="0, 0, 0, 0" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="passInput"  Height="50" Width="250" Grid.Row="1"
-                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBox x:Name="PassCategoryName"  Height="50" Width="250" Grid.Row="0" Grid.Column="0" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+        
+        <TextBlock  Grid.Row="1"   Text="Productivity(0, 1, 2)" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="0"
+                    HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0, 0, 0, 25"/>
 
-        <TextBlock  Grid.Row="2" x:Name="RegLoginText"   Text="What's your pass(Pass)?"   Background="LightSlateGray" Foreground="White" FontSize="15" 
-                    HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="PassProductive"  Height="50" Width="250" Grid.Row="1" Grid.Column="0" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 
-        <Button Content="Ok" Width="100" Height="50" Click="Button_ClickPass" Background="PaleVioletRed" Grid.Row="4" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Content="Ok" Width="100" Height="50" Click="Button_ClickPass" Background="PaleVioletRed" Grid.Row="2" Foreground="White" FontSize="15"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
 
-        <TextBox x:Name="loginInput" Grid.Row="3" Width="250" Height="50"
-                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <DockPanel Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="1" Margin="5 25 5 5" Grid.Row="1">
-            <Border>
-                <Image Name="AdminImage" Source="Images/adminIcon.png" Stretch="Uniform" ></Image>
-            </Border>
-        </DockPanel>
-    </Grid>
-    <!--<Grid  Background="LightSlateGray">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-        <TextBlock  Grid.Row="0"   Text="Select new category" Background="LightSlateGray" Foreground="Black"  FontSize="15" 
-                    HorizontalAlignment="Center" Margin="0" VerticalAlignment="Bottom"/>
-
-        <TextBox x:Name="PassCategory"  Height="50" Width="250" Grid.Row="1"
-                 HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        --><!--  <Button Content="Ok" Width="100" Height="50" Click="Button_ClickPass" Background="PaleVioletRed" Grid.Row="4" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-        <DockPanel Grid.Column="1" Grid.RowSpan="4" Grid.ColumnSpan="1" Margin="5 25 5 5" Grid.Row="1">
-            <Border>
-                <Image Name="AdminImage" Source="Images/clientIcon.png" Stretch="Uniform" ></Image>
-            </Border>
-        </DockPanel>--><!--
-
-        <ListBox Name="CategoryListBox" Margin="20 30 20 60" Background="LightGray" Grid.Column="1">
+        <TextBlock  Grid.Row="0"   Text="Old Categories" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="1"
+                    HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+        
+        <ListBox Name="CategoryListBox" Margin="10, 0, 20, 20" Background="PaleVioletRed" Grid.Column="1" Grid.RowSpan="4" Grid.Row="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -87,12 +52,12 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        --><!--<TextBlock Name="CategoryTextBlock" Grid.Column="1" Grid.Row="1" FontSize="22" FontFamily="Calibri" Margin="10 3 10 10" Initialized="CategoryTextBlock_Initialized"></TextBlock>
-                        <TextBlock Name="ProductiveTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22" FontFamily="Calibri" Margin="10 3 0 10" Initialized="ProductiveTextBlock_Initialized"></TextBlock>-->
-                        <!--  <TextBlock Name="SongTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22" FontFamily="Calibri" Margin="10 3 0 10" Initialized="SongTextBlock_Initialized"></TextBlock> --><!--
+                        <TextBlock Name="CategoryTextBlock" Grid.Column="1" Grid.Row="1" FontSize="22" FontFamily="Calibri" Margin="10 3 10 10" Initialized="CategoryTextBlock_Initialized"></TextBlock>
+                        <TextBlock Name="ProductiveTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22" FontFamily="Calibri" Margin="10 3 0 10" Initialized="ProductiveTextBlock_Initialized"></TextBlock>
+                        <!--  <TextBlock Name="SongTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22" FontFamily="Calibri" Margin="10 3 0 10" Initialized="SongTextBlock_Initialized"></TextBlock> -->
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </Grid>-->
+    </Grid>
 </Window>

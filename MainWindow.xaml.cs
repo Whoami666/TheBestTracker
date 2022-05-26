@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TheBestTracker.CategoryStuff;
+using TheBestTracker.UserInterface;
 
 namespace TheBestTracker
 {
@@ -23,6 +25,12 @@ namespace TheBestTracker
         public MainWindow()
         {
             InitializeComponent();
+
+            Settings adminWindow = new Settings();
+            adminWindow.Show();
+            this.Close();
         }
+
+
     }
 }

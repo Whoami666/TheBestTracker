@@ -20,58 +20,116 @@ namespace TheBestTracker.UserInterface
     /// </summary>
     public partial class Settings : Window
     {
-        public Settings()            //CategoryListBox.ItemsSource = new List<Category>
-            //{
-            //    new Category
-            //    {
-            //        Name = "Leonardo DiCaptio",
-            //        Productive = 1
-            //    },
 
-            //    new Category
-            //    {
-            //        Name = "Not Leonardo",
-            //        Productive = 0
-            //    }
-            //};
+        public Settings()
         {
             InitializeComponent();
+        //    DefaultCategories(); добавление дефолтных категорий в базу данных
+            using (Context context = new Context())
+            {
+                CategoryListBox.ItemsSource = context.Category.ToList();
+            }
 
+        }
+
+
+        private void CategoryTextBlock_Initialized(object sender, EventArgs e)
+        {
+            TextBlock CategoryTextBlock = sender as TextBlock;
+            Category category = CategoryTextBlock.DataContext as Category;
+            CategoryTextBlock.Text = category.Name;
+        }
+
+        private void ProductiveTextBlock_Initialized(object sender, EventArgs e)
+        {
+            TextBlock ProductiveTextBlock = sender as TextBlock;
+            Category category = ProductiveTextBlock.DataContext as Category;
+            ProductiveTextBlock.Text = category.Productive.ToString();
+        }
+
+        protected static bool OneInteger(string str)
+        {
+            string[] integerlist = str.Split(new char[] { ' ', '-' });
+            if (integerlist.Length != 1) return false;
+            else
+            {
+                if (int.TryParse(integerlist[0], out int x))
+                {
+                    if (x == 0 || x == 1 || x == 2) return true;
+                    else return false;
+                }
+                else return false;
+            }
         }
 
         private void Button_ClickPass(object sender, RoutedEventArgs e)
         {
-            string password = "Pass";
-            string login = "Admin";
 
-            if (password == loginInput.Text & login == passInput.Text)
+            if (PassCategoryName.Text.Length == 0 || OneInteger(PassProductive.Text) == false)
             {
-                MessageBox.Show("Ok");
-          //      AdminChoice1 adminWindow = new AdminChoice1();
-            //    adminWindow.Show();
-                this.Close();
+                MessageBox.Show("Please check your data. Productive category must be 0, 1 or 2. Category name must be at least 1 character long");
             }
 
-            else MessageBox.Show("Try again(((");
+            else
+            {
+                string name;
+                int productive;
+                productive = int.Parse(PassProductive.Text);
+                name = PassCategoryName.Text;
+                AddNewCategory(name, productive);
+                MessageBox.Show("Ok");
+
+       //         UserWindowMain userWindow = new UserWindowMain();
+        //        userWindow.Show();
+                this.Close();
+            }
+            this.Close();
         }
 
-        //private void CategoryTextBlock_Initialized(object sender, EventArgs e)
-        //{
-        //    TextBlock CategoryTextBlock = sender as TextBlock;
-        //    Category category = CategoryTextBlock.DataContext as Category;
-        //    CategoryTextBlock.Text = category.Name;
-        //}
+        private void AddNewCategory(string name, int productive)
+        {
+            using (Context context = new Context())
+            {
+                var newCategory = new Category
+                {
+                    Name = name,
+                    Productive = productive
+                };
+                context.Category.Add(newCategory);
+                context.SaveChanges();
+            }
+        }
 
-        //private void ProductiveTextBlock_Initialized(object sender, EventArgs e)
-        //{
-        //    TextBlock ProductiveTextBlock = sender as TextBlock;
-        //    Category category = ProductiveTextBlock.DataContext as Category;
-        //    ProductiveTextBlock.Text = category.Productive.ToString();
-        //}
-        //   private void Button_ClickPass(object sender, RoutedEventArgs e)
-        //  {
 
-        //      this.Close();
-        //  }
+        private void DefaultCategories()
+        {
+            using (Context context = new Context()) //Создание подключения (локальной копии ДБ)
+            {
+                //Объявление объектов
+                Category category1 = new Category
+                {
+                    Name = "Lana Del Rey",
+                    Productive = 1
+                };
+                Category category2 = new Category
+                {
+                    Name = "Sleep",
+                    Productive = 0
+                };
+                Category category3 = new Category
+                {
+                    Name = "Eat",
+                    Productive = 0
+                };
+
+                context.Category.Add(category1);
+                context.Category.Add(category2);
+                context.Category.Add(category3);
+
+                context.SaveChanges(); //Чтобы добавленные объекты отправились в базу данных, нужно вызвать метод, сохраняющий изменения
+
+                MessageBox.Show("Data saved.");
+            }
+        }
     }
 }
