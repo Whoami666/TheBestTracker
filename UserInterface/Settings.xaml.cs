@@ -68,6 +68,9 @@ namespace TheBestTracker.UserInterface
             if (PassCategoryName.Text.Length == 0 || OneInteger(PassProductive.Text) == false)
             {
                 MessageBox.Show("Please check your data. Productive category must be 0, 1 or 2. Category name must be at least 1 character long");
+                Settings userWindow = new Settings();
+                userWindow.Show();
+                this.Close();
             }
 
             else
@@ -79,8 +82,8 @@ namespace TheBestTracker.UserInterface
                 AddNewCategory(name, productive);
                 MessageBox.Show("Ok");
 
-       //         UserWindowMain userWindow = new UserWindowMain();
-        //        userWindow.Show();
+                Settings userWindow = new Settings();
+                userWindow.Show();
                 this.Close();
             }
             this.Close();
