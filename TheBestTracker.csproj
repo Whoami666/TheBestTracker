@@ -66,7 +66,27 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CategoryStuff\Category.cs" />
+    <Compile Include="CategoryStuff\TimeBlocks.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="Migrations\202205261309222_InitialCreate.cs" />
+    <Compile Include="Migrations\202205261309222_InitialCreate.designer.cs">
+      <DependentUpon>202205261309222_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205291433249_AddedBlocks.cs" />
+    <Compile Include="Migrations\202205291433249_AddedBlocks.designer.cs">
+      <DependentUpon>202205291433249_AddedBlocks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202205291500520_AddedColors.cs" />
+    <Compile Include="Migrations\202205291500520_AddedColors.designer.cs">
+      <DependentUpon>202205291500520_AddedColors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="UserInterface\SeeTheWeek.xaml.cs">
+      <DependentUpon>SeeTheWeek.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Settings - Копировать.xaml.cs">
+      <DependentUpon>Settings - Копировать.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -82,6 +102,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserInterface\SeeTheWeek.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\Settings - Копировать.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserInterface\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -101,6 +129,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202205261309222_InitialCreate.resx">
+      <DependentUpon>202205261309222_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205291433249_AddedBlocks.resx">
+      <DependentUpon>202205291433249_AddedBlocks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202205291500520_AddedColors.resx">
+      <DependentUpon>202205291500520_AddedColors.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

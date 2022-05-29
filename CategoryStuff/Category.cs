@@ -12,6 +12,7 @@ namespace TheBestTracker.CategoryStuff
         public string Name { get; set; }
         public int Productive { get; set; }
 
+        public string Color { get; set; }
         public Category()
         {
 

@@ -24,12 +24,12 @@ namespace TheBestTracker.UserInterface
         public Settings()
         {
             InitializeComponent();
-        //    DefaultCategories(); добавление дефолтных категорий в базу данных
+         //   DefaultBlocks();
+           // DefaultCategories(); // добавление дефолтных категорий в базу данных
             using (Context context = new Context())
             {
                 CategoryListBox.ItemsSource = context.Category.ToList();
             }
-
         }
 
 
@@ -112,22 +112,54 @@ namespace TheBestTracker.UserInterface
                 Category category1 = new Category
                 {
                     Name = "Lana Del Rey",
-                    Productive = 1
+                    Productive = 1,
+                    Color = "Black"
                 };
                 Category category2 = new Category
                 {
                     Name = "Sleep",
-                    Productive = 0
+                    Productive = 0,
+                    Color = "Red"
                 };
                 Category category3 = new Category
                 {
                     Name = "Eat",
-                    Productive = 0
+                    Productive = 0,
+                    Color = "White"
                 };
 
                 context.Category.Add(category1);
                 context.Category.Add(category2);
                 context.Category.Add(category3);
+
+                context.SaveChanges(); //Чтобы добавленные объекты отправились в базу данных, нужно вызвать метод, сохраняющий изменения
+
+                MessageBox.Show("Data saved.");
+            }
+        }
+
+        private void DefaultBlocks()
+        {
+            using (Context context = new Context()) //Создание подключения (локальной копии ДБ)
+            {
+                //Объявление объектов
+                int prevTime = 0;
+                for (int i = 0; i < 24; i++)
+                {
+                    string timer;
+                    prevTime = prevTime + 1;
+                    if (prevTime < 10)
+                    {
+                        timer = "0" + prevTime.ToString() + ":00";
+                    }
+                    else timer = prevTime.ToString() + ":00";
+                    TimeBlocks block = new TimeBlocks
+                    {
+                        Index = i,
+                        Time = timer
+                    };
+                    context.TimeBlock.Add(block);
+                }
 
                 context.SaveChanges(); //Чтобы добавленные объекты отправились в базу данных, нужно вызвать метод, сохраняющий изменения
 
