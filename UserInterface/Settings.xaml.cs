@@ -24,8 +24,8 @@ namespace TheBestTracker.UserInterface
         public Settings()
         {
             InitializeComponent();
-         //   DefaultBlocks();
-           // DefaultCategories(); // добавление дефолтных категорий в базу данных
+            //DefaultBlocks();
+            //DefaultCategories(); // добавление дефолтных категорий в базу данных
             using (Context context = new Context())
             {
                 CategoryListBox.ItemsSource = context.Category.ToList();
@@ -97,7 +97,7 @@ namespace TheBestTracker.UserInterface
                 {
                     Name = name,
                     Productive = productive
-                };
+                };                
                 context.Category.Add(newCategory);
                 context.SaveChanges();
             }
