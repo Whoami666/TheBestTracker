@@ -26,10 +26,12 @@ namespace TheBestTracker
         {
             InitializeComponent();
 
-            SettingsWindow settingsWindow = new SettingsWindow();
-            settingsWindow.Show();
-            //SeeTheWeek adminWindow = new SeeTheWeek();
-            //adminWindow.Show();
+           // CreateEventWindow сreateEventWindow = new CreateEventWindow();
+          //  SettingsWindow сreateEventWindow = new SettingsWindow();
+            SeeTheWeekV2 сreateEventWindow = new SeeTheWeekV2();
+            сreateEventWindow.Show();
+            //  SeeTheWeek сreateEventWindow = new SeeTheWeek();
+            //  сreateEventWindow.Show();
             this.Close();
         }
 
