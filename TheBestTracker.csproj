@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CategoryStuff\Category.cs" />
+    <Compile Include="CategoryStuff\CategoryTime.cs" />
     <Compile Include="CategoryStuff\TimeBlocks.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Migrations\202205261309222_InitialCreate.cs" />
@@ -95,9 +96,27 @@
     <Compile Include="Migrations\202205291500520_AddedColors.designer.cs">
       <DependentUpon>202205291500520_AddedColors.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202206011408031_Foreground-color.cs" />
+    <Compile Include="Migrations\202206011408031_Foreground-color.designer.cs">
+      <DependentUpon>202206011408031_Foreground-color.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206012024175_DatesCats.cs" />
+    <Compile Include="Migrations\202206012024175_DatesCats.designer.cs">
+      <DependentUpon>202206012024175_DatesCats.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202206012034486_DatesCats2.cs" />
+    <Compile Include="Migrations\202206012034486_DatesCats2.designer.cs">
+      <DependentUpon>202206012034486_DatesCats2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="UserInterface\CreateEventWindow.xaml.cs">
+      <DependentUpon>CreateEventWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\SeeTheWeek.xaml.cs">
       <DependentUpon>SeeTheWeek.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\SeeTheWeekV2.xaml.cs">
+      <DependentUpon>SeeTheWeekV2.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\Settings - Копировать.xaml.cs">
       <DependentUpon>Settings - Копировать.xaml</DependentUpon>
@@ -120,7 +139,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserInterface\CreateEventWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserInterface\SeeTheWeek.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\SeeTheWeekV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -159,6 +186,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202205291500520_AddedColors.resx">
       <DependentUpon>202205291500520_AddedColors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206011408031_Foreground-color.resx">
+      <DependentUpon>202206011408031_Foreground-color.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206012024175_DatesCats.resx">
+      <DependentUpon>202206012024175_DatesCats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202206012034486_DatesCats2.resx">
+      <DependentUpon>202206012034486_DatesCats2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -13,6 +13,8 @@ namespace TheBestTracker
         public DbSet<Category> Category { get; set; }
         public DbSet<TimeBlocks> TimeBlock { get; set; }
 
+        public DbSet<CategoryTime> CategoryTime { get; set; }
+
         public Context() : base("DBConnection")
         {
 
