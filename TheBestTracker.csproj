@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="CategoryStuff\Category.cs" />
     <Compile Include="CategoryStuff\CategoryTime.cs" />
+    <Compile Include="CategoryStuff\DataView\DatesView.cs" />
     <Compile Include="CategoryStuff\TimeBlocks.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Migrations\202205261309222_InitialCreate.cs" />
@@ -118,6 +119,15 @@
     <Compile Include="UserInterface\SeeTheWeekV2.xaml.cs">
       <DependentUpon>SeeTheWeekV2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\SeeThe\SeeTheCalendar.xaml.cs">
+      <DependentUpon>SeeTheCalendar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\SeeThe\SeeTheMonth.xaml.cs">
+      <DependentUpon>SeeTheMonth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\SeeThe\SeeTheMonthV3.xaml.cs">
+      <DependentUpon>SeeTheMonthV3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\Settings - Копировать.xaml.cs">
       <DependentUpon>Settings - Копировать.xaml</DependentUpon>
     </Compile>
@@ -148,6 +158,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserInterface\SeeTheWeekV2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\SeeThe\SeeTheCalendar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\SeeThe\SeeTheMonth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\SeeThe\SeeTheMonthV3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

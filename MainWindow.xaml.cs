@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TheBestTracker.CategoryStuff;
 using TheBestTracker.UserInterface;
+using TheBestTracker.UserInterface.SeeThe;
 
 namespace TheBestTracker
 {
@@ -26,8 +27,10 @@ namespace TheBestTracker
         {
             InitializeComponent();
 
-            //CreateEventWindow сreateEventWindow = new CreateEventWindow();
-          //  SettingsWindow сreateEventWindow = new SettingsWindow();
+            //   CreateEventWindow сreateEventWindow = new CreateEventWindow();
+            //   SettingsWindow сreateEventWindow = new SettingsWindow();
+          //  SeeTheCalendar сreateEventWindow = new SeeTheCalendar();
+          //  SeeTheMonthV3 сreateEventWindow = new SeeTheMonthV3();
             SeeTheWeekV2 сreateEventWindow = new SeeTheWeekV2();
             сreateEventWindow.Show();
             //  SeeTheWeek сreateEventWindow = new SeeTheWeek();
