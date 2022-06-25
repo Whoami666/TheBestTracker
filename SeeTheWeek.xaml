@@ -1,0 +1,125 @@
+﻿<Window x:Class="TheBestTracker.UserInterface.SeeTheWeek"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TheBestTracker.UserInterface"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="SeeTheWeek" Height="650" Width="905">
+
+    <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="740"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+
+        </Grid.RowDefinitions>
+
+        <TextBlock  Grid.Row="0"   Text="Select new category name" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="0"
+                    HorizontalAlignment="Center" Margin="0, 0, 0, 0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="PassCategoryName"  Height="50" Width="250" Grid.Row="0" Grid.Column="0" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+
+
+        <ListView Name="TimeListBox" Grid.Column="1" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Time}"
+                                    Width="75" >Time</GridViewColumn>
+                    <!--<GridViewColumn DisplayMemberBinding="{Binding Path=Price}">Цена</GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        
+        
+
+        <ListView Name="CategoryListBox" Grid.Column="2" Grid.Row="1" ItemsSource="{Binding}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Monday" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}" 
+                                               Width="100" TextAlignment="Center" Margin="-11" Foreground="{Binding Path=ForegroundColor}" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Tuesday" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}" 
+                                               Width="100" TextAlignment="Center" Margin="-11" Foreground="{Binding Path=ForegroundColor}" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Wednesday" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}"  Foreground="{Binding Path=ForegroundColor}" 
+                                               Width="100" TextAlignment="Center" Margin="-11"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Thursday" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}" 
+                                               Width="100" TextAlignment="Center" Margin="-11" Foreground="{Binding Path=ForegroundColor}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Friday" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}" 
+                                               Width="100" TextAlignment="Center" Margin="-11" Foreground="{Binding Path=ForegroundColor}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Saturday" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}" 
+                                               Width="100" TextAlignment="Center" Margin="-11" Foreground="{Binding Path=ForegroundColor}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Sunday" Width="105">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Name}"  Background="{Binding Path=Color}" 
+                                               Width="105" TextAlignment="Center" Margin="-11" Foreground="{Binding Path=ForegroundColor}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}"
+                                    Width="100" >Monday</GridViewColumn>
+           
+                    <!--<GridViewColumn DisplayMemberBinding="{Binding Path=Price}">Цена</GridViewColumn>-->
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
