@@ -83,6 +83,7 @@
     <Compile Include="CategoryStuff\Category.cs" />
     <Compile Include="CategoryStuff\CategoryTime.cs" />
     <Compile Include="CategoryStuff\DataView\DatesView.cs" />
+    <Compile Include="CategoryStuff\DataView\WeekMonthYearAnalytics.cs" />
     <Compile Include="CategoryStuff\TimeBlocks.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Migrations\202205261309222_InitialCreate.cs" />
@@ -110,17 +111,23 @@
       <DependentUpon>202206012034486_DatesCats2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="UserInterface\Analytics\AnalyticsWindow.xaml.cs">
+      <DependentUpon>AnalyticsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Analytics\WeekAnalytics.xaml.cs">
+      <DependentUpon>WeekAnalytics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\CreateEventWindow.xaml.cs">
       <DependentUpon>CreateEventWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\SeeTheWeek.xaml.cs">
-      <DependentUpon>SeeTheWeek.xaml</DependentUpon>
+    <Compile Include="UserInterface\MessageBoxes\WeekMB.xaml.cs">
+      <DependentUpon>WeekMB.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\NothingSettings.xaml.cs">
+      <DependentUpon>NothingSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\SeeTheWeekV2.xaml.cs">
       <DependentUpon>SeeTheWeekV2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\SeeThe\SeeTheCalendar.xaml.cs">
-      <DependentUpon>SeeTheCalendar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\SeeThe\SeeTheMonth.xaml.cs">
       <DependentUpon>SeeTheMonth.xaml</DependentUpon>
@@ -130,9 +137,6 @@
     </Compile>
     <Compile Include="UserInterface\Settings - Копировать.xaml.cs">
       <DependentUpon>Settings - Копировать.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -149,19 +153,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserInterface\Analytics\AnalyticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\Analytics\WeekAnalytics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserInterface\CreateEventWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserInterface\SeeTheWeek.xaml">
+    <Page Include="UserInterface\MessageBoxes\WeekMB.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\NothingSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserInterface\SeeTheWeekV2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserInterface\SeeThe\SeeTheCalendar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,10 +188,6 @@
     <Page Include="UserInterface\Settings - Копировать.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserInterface\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserInterface\SettingsWindow.xaml">
       <SubType>Designer</SubType>
@@ -232,10 +240,40 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\adminIcon.png" />
+    <Resource Include="UserInterface\Images\adminIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\clientIcon.png" />
+    <Resource Include="UserInterface\Images\clientIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\analytics2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\addClicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\analyticsClicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\exit2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\home2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\homeclicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\settings3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Images\settingsClicked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
