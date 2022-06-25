@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TheBestTracker.CategoryStuff;
+using TheBestTracker.UserInterface.SeeThe;
 
 namespace TheBestTracker.UserInterface
 {
@@ -22,20 +23,22 @@ namespace TheBestTracker.UserInterface
     public partial class SettingsWindow : Window
     {
         private List<int> listId = new List<int>();
-        
+
         public SettingsWindow()
         {
             InitializeComponent();
             //цвет по умолчанию
             colorPicker.SelectedColor = Colors.Red;
+            foregroundColorPicker.SelectedColor = Colors.Black;
             //DefaultBlocks();
             //DefaultCategories(); // добавление дефолтных категорий в базу данных
             using (Context context = new Context())
             {
                 categoryListBox.ItemsSource = context.Category.ToList();
-
+                colorsListBox.ItemsSource = context.Category.ToList();
             }
         }
+
 
         private void CategoryTextBlock_Initialized(object sender, EventArgs e)
         {
@@ -67,7 +70,7 @@ namespace TheBestTracker.UserInterface
             }
         }
 
-        private void AddNewCategory(string name, int productive, string color)
+        private void AddNewCategory(string name, int productive, string color, string foreground)
         {
             using (Context context = new Context())
             {
@@ -75,7 +78,8 @@ namespace TheBestTracker.UserInterface
                 {
                     Name = name,
                     Productive = productive,
-                    Color = color
+                    Color = color,
+                    ForegroundColor = foreground
                 };                
                 context.Category.Add(newCategory);
                 context.SaveChanges();
@@ -92,12 +96,13 @@ namespace TheBestTracker.UserInterface
                     if (entety.Id == id)
                     {
                         context.Category.Remove(entety);
+                        break;
                     }
+
                 }
                 context.SaveChanges();                
             }
         }
-
 
         private void DefaultCategories()
         {
@@ -108,19 +113,22 @@ namespace TheBestTracker.UserInterface
                 {
                     Name = "Lana Del Rey",
                     Productive = 1,
-                    Color = "Black"//System.Windows.Media.Color.FromArgb(255,255,255,255) //"Black"
+                    Color = "Black",//System.Windows.Media.Color.FromArgb(255,255,255,255) //"Black"
+                    ForegroundColor = "Yellow"
                 };
                 Category category2 = new Category
                 {
                     Name = "Sleep",
                     Productive = 0,
-                    Color = "Red"//System.Windows.Media.Color.FromArgb(255, 255, 0, 0)//"Red"
+                    Color = "Red",//System.Windows.Media.Color.FromArgb(255, 255, 0, 0)//"Red"
+                    ForegroundColor = "Black"
                 };
                 Category category3 = new Category
                 {
                     Name = "Eat",
                     Productive = 0,
-                    Color = "White"//System.Windows.Media.Color.FromArgb(255, 0, 0, 0)//"White"
+                    Color = "White",//System.Windows.Media.Color.FromArgb(255, 0, 0, 0)//"White"
+                    ForegroundColor = "Black"
                 };
 
                 context.Category.Add(category1);
@@ -138,22 +146,21 @@ namespace TheBestTracker.UserInterface
             using (Context context = new Context()) //Создание подключения (локальной копии ДБ)
             {
                 //Объявление объектов
-                int prevTime = 0;
+                List<string> timeBlocks = new List<string>
+                    { "0:00-1:00", "1:00-2:00","2:00-3:00", "3:00-4:00", "4:00-5:00", "5:00-6:00",  "6:00-7:00",
+                      "7:00-8:00", "8:00-9:00",  "9:00-10:00", "10:00-11:00", "11:00-12:00",
+                      "12:00-13:00",  "13:00-14:00", "14:00-15:00", "15:00-16:00", "16:00-17:00", "17:00-18:00",
+                      "18:00-19:00", "19:00-20:00", "20:00-21:00", "21:00-22:00", "22:00-23:00", "23:00-24:00"
+                    };
                 for (int i = 0; i < 24; i++)
                 {
-                    string timer;
-                    prevTime = prevTime + 1;
-                    if (prevTime < 10)
-                    {
-                        timer = "0" + prevTime.ToString() + ":00";
-                    }
-                    else timer = prevTime.ToString() + ":00";
                     TimeBlocks block = new TimeBlocks
                     {
                         Index = i,
-                        Time = timer
+                        Time = timeBlocks[i]
                     };
                     context.TimeBlock.Add(block);
+
                 }
 
                 context.SaveChanges(); //Чтобы добавленные объекты отправились в базу данных, нужно вызвать метод, сохраняющий изменения
@@ -176,11 +183,14 @@ namespace TheBestTracker.UserInterface
             {
                 string name;
                 int productive;
-                string color;
+                string color, foreground;
+
                 productive = int.Parse(PassProductive.Text);
                 name = PassCategoryName.Text;
                 color = colorPicker.SelectedColorText;
-                AddNewCategory(name, productive, color);
+                foreground = foregroundColorPicker.SelectedColorText;
+
+                AddNewCategory(name, productive, color, foreground);
                 MessageBox.Show("Ok");
 
                 SettingsWindow userWindow = new SettingsWindow();
@@ -192,6 +202,7 @@ namespace TheBestTracker.UserInterface
 
         private void RemoveCategory_Click(object sender, RoutedEventArgs e)
         {
+
             //categoryListBox.Items.Clear();
             if (categoryListBox.SelectedIndex != -1)
             {
@@ -203,9 +214,10 @@ namespace TheBestTracker.UserInterface
                 this.Close();
             }
             else
-                MessageBox.Show("Ничего не выбрано");
+                MessageBox.Show("Nothing is selected");
            
         }
+
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
@@ -215,8 +227,41 @@ namespace TheBestTracker.UserInterface
         private void colorPicker_SelectedColorChanged(object sender, RoutedPropertyChangedEventArgs<Color?> e)
         {
             //MessageBox.Show(colorPicker.SelectedColorText);
+          
             
-            
+        }
+
+        private void addEventClick(object sender, RoutedEventArgs e)
+        {
+            CreateEventWindow сreateEventWindow = new CreateEventWindow(null);
+            сreateEventWindow.Show();
+            this.Close();
+        }
+
+        private void showAnalytics_Click(object sender, RoutedEventArgs e)
+        {
+            AnalyticsWindow analyticsWindow = new AnalyticsWindow();
+            analyticsWindow.Show();
+            this.Close();
+        }
+
+        private void settingsClick(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
+            this.Close();
+        }
+
+        private void homeClick(object sender, RoutedEventArgs e)
+        {
+            SeeTheWeekV2 see = new SeeTheWeekV2();
+            see.Show();
+            this.Close();
+        }
+
+        private void exitClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

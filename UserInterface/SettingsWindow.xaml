@@ -6,60 +6,108 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:TheBestTracker.UserInterface"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="650" Width="800">
-    <Grid Background="LightSlateGray">
+        ResizeMode="CanMinimize"
+        Height="640" Width="970">
+    <Grid Background="#32373c">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="450"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="60"/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
 
-        <TextBlock  Grid.Row="2" Text="Select color" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="0"
+        <TextBlock  Grid.Row="3" Text="Select background color"  Foreground="White"  FontSize="20" Grid.Column="0"
                     HorizontalAlignment="Center" Margin="0, 0, 0, 0" VerticalAlignment="Top"/>
 
         <xctk:ColorPicker x:Name="colorPicker"
-                           VerticalAlignment="Top" Grid.Row="2" Height="30" Width="250" DisplayColorAndName="True" 
+                           VerticalAlignment="Top" Grid.Row="3" Height="30" Width="250" DisplayColorAndName="True" 
                    Margin="36,30,39,21"  SelectedColorChanged="colorPicker_SelectedColorChanged"/>
-        
-        <TextBlock  Grid.Row="0"   Text="Select new category name" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="0"
+
+        <TextBlock  Grid.Row="4" Text="Select foreground color" Foreground="White"  FontSize="20" Grid.Column="0"
                     HorizontalAlignment="Center" Margin="0, 0, 0, 0" VerticalAlignment="Top"/>
 
-        <TextBox x:Name="PassCategoryName"  Height="50" Width="250" Grid.Row="0" Grid.Column="0" 
+        <xctk:ColorPicker x:Name="foregroundColorPicker"
+                           VerticalAlignment="Top" Grid.Row="4" Height="30" Width="250" DisplayColorAndName="True" 
+                   Margin="36,30,39,21"  SelectedColorChanged="colorPicker_SelectedColorChanged"/>
+        
+
+        <TextBlock  Grid.Row="1"   Text="Select new category name"  Foreground="White"  FontSize="20" Grid.Column="0"
+                    HorizontalAlignment="Center" Margin="0, 5, 0, 0" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="PassCategoryName"  Height="35" Width="250" Grid.Row="1" Grid.Column="0" 
                  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 
-        <TextBlock  Grid.Row="1"   Text="Productivity(0, 1, 2)" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="0"
+        <TextBlock  Grid.Row="2"   Text="Productivity(0, 1, 2)"  Foreground="White"  FontSize="20" Grid.Column="0"
                     HorizontalAlignment="Center"  VerticalAlignment="Top" Margin="0, 0, 0, 25"/>
 
-        <TextBox x:Name="PassProductive"  Height="50" Width="250" Grid.Row="1" Grid.Column="0" 
+        <TextBox x:Name="PassProductive"  Height="35" Width="250" Grid.Row="2" Grid.Column="0" 
                  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
 
-        <Button Name="AddCategory"  Content="Добавить" Width="100" Height="50" Click="AddCategory_Click" Background="PaleVioletRed" Grid.Row="3" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
+        <Button Name="AddCategory"  Content="Add" Width="100" Height="45" Click="AddCategory_Click" Background="#00bbd3" Grid.Row="5" Foreground="White" FontSize="18"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 0, 135, 50"  FontFamily="Verdana">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+                
 
-        <Button Name="RemoveCategory"  Content="Удалить" Width="100" Height="50" Click="RemoveCategory_Click" Background="PaleVioletRed" Grid.Row="4" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
+        <Button Name="RemoveCategory"  Content="Remove" Width="100" Height="45" Click="RemoveCategory_Click" Background="#00bbd3" Grid.Row="5" Foreground="White" FontSize="18"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Margin="125, 0, 0, 50" FontFamily="Verdana">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
 
-        <Button Name="Exit"  Content="Выход" Width="100" Height="50" Click="Exit_Click" Background="PaleVioletRed" Grid.Row="5" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 0, 0, 0"/>
+
+        <TextBlock  Grid.Row="1"   Text="Old Categories" Foreground="White"  FontSize="20" Grid.Column="1"
+                    HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Top"/>
+        <TextBlock  Grid.Row="1"   Text="Old Colors" Foreground="White"  FontSize="20" Grid.Column="2"
+                    HorizontalAlignment="Center" Margin="0 5 30 0" VerticalAlignment="Top"/>
 
 
-        <TextBlock  Grid.Row="0"   Text="Old Categories" Background="LightSlateGray" Foreground="White"  FontSize="20" Grid.Column="1"
-                    HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
 
-        <ListBox Name="categoryListBox" Margin="10, 0, 20, 20" Background="PaleVioletRed" Grid.Column="1" Grid.RowSpan="5" Grid.Row="1" >
+        <ListView Name="colorsListBox" Grid.Column="2" Grid.Row="1" ItemsSource="{Binding}" Grid.RowSpan="5" Margin="2 35 41 10" Background="#32373c">
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock x:Name="Txt" Text="{Binding Path=Color}" Background="{Binding Path=Color}" Foreground="{Binding Path=ForegroundColor}" Height="28"
+                                               Width="200" TextAlignment="Center" Margin="0 0 0 0" FontSize="15"  FontFamily="Verdana"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListBox Name="categoryListBox" Margin="0, 35, 0, 10" Background="#141618" Grid.Column="1" Grid.RowSpan="5" Grid.Row="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -68,12 +116,87 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Name="CategoryTextBlock" Grid.Column="1" Grid.Row="1" FontSize="22" FontFamily="Calibri" Margin="10 3 10 10" Initialized="CategoryTextBlock_Initialized"></TextBlock>
-                        <TextBlock Name="ProductiveTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22" FontFamily="Calibri" Margin="10 3 0 10" Initialized="ProductiveTextBlock_Initialized"></TextBlock>
-                        <!--  <TextBlock Name="SongTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22" FontFamily="Calibri" Margin="10 3 0 10" Initialized="SongTextBlock_Initialized"></TextBlock> -->
+                        <TextBlock FontFamily="Verdana" Background="#32373c" Width="200" Height="25"  Foreground="White"  Name="CategoryTextBlock" Grid.Column="0" Grid.Row="0" FontSize="15" 
+                                   Margin="10 0 10 0" Initialized="CategoryTextBlock_Initialized" TextAlignment="Center"></TextBlock>
+                        <TextBlock FontFamily="Verdana" Foreground="White" Height="16" Name="ProductiveTextBlock" Grid.Column="1" Grid.Row="0" FontSize="15" 
+                                   Margin="5 3 0 10" Initialized="ProductiveTextBlock_Initialized"></TextBlock>
+                        <!--<TextBlock Name="ColorTextBlock" Grid.Column="1" Grid.Row="2" FontSize="13" FontFamily="Calibri" Margin="10 3 0 10" Initialized="SongTextBlock_Initialized"></TextBlock>--> 
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <Button Name="home" Width="70" Height="35" Click="homeClick" Background="#00bbd3" Grid.Column="0" 
+                Grid.Row="0" Foreground="Black" FontSize="14"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 7, 180, 0" FontFamily="Verdana" RenderTransformOrigin="-0.979,0.727">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <StackPanel>
+                <Image Source="Images/home2.png" Height="34" Margin="0, -1, 0, 0" RenderTransformOrigin="-6.248,0.901"/>
+                <TextBlock Text="Home"/>
+            </StackPanel>
+        </Button>
+
+        <Button Name="addEvent6"  Width="70" Height="35" Click="addEventClick" Background="#00bbd3" Grid.Column="0" 
+                Grid.Row="0" Foreground="Black" FontSize="14"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5, 7, 0, 0" FontFamily="Verdana">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <StackPanel>
+                <Image Source="Images/add.png" Height="34"  Margin="0, -1, 0, 0"/>
+                <TextBlock Text="Add"/>
+            </StackPanel>
+        </Button>
+
+        <Button Name="settings" Width="70" Height="35" Click="settingsClick" Background="#32373c" Grid.Column="0" Grid.Row="0"
+                Foreground="Black" FontSize="14"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="190, 7, 0, 0" FontFamily="Verdana">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <StackPanel>
+                <Image Source="Images/settingsClicked.png" Height="33" Margin="0,-1,0,0"/>
+                <TextBlock Text="Settings"/>
+            </StackPanel>
+        </Button>
+
+        <Button Name="showAnalytics" Width="70" Height="35" Click="showAnalytics_Click" Background="#00bbd3"
+                Grid.Column="0" Grid.Row="0" Foreground="Black" FontSize="14"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="375, 7, 0, 0" FontFamily="Verdana">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <StackPanel>
+                <Image Source="Images/analytics2.png" Height="34"  Margin="0, -1, 0, 0"/>
+                <TextBlock Text="Analytics"/>
+            </StackPanel>
+        </Button>
+
+        <Button Name="exit" Width="70" Height="35" Click="exitClick" Background="#00bbd3" HorizontalAlignment="Center"
+                Grid.Column="8" Grid.Row="0" Foreground="Black" FontSize="14"
+                VerticalAlignment="Top" Margin="120, 7, 0, 0" FontFamily="Verdana">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+            <StackPanel>
+                <Image Source="Images/exit2.png" Height="34"  Margin="0, -1, 0, 0"/>
+                <TextBlock Text="Exit"/>
+            </StackPanel>
+        </Button>
+
+
+
     </Grid>
 </Window>
