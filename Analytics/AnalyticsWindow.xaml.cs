@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TheBestTracker.CategoryStuff;
+using TheBestTracker.CategoryStuff.DataView;
+using TheBestTracker.UserInterface.Analytics;
+using TheBestTracker.UserInterface.Analytics.Charts;
+using TheBestTracker.UserInterface.MessageBoxes;
 
 namespace TheBestTracker.UserInterface
 {
@@ -21,11 +25,20 @@ namespace TheBestTracker.UserInterface
     public partial class AnalyticsWindow : Window
     {
         private List<int> listId = new List<int>();
-
+        public int nDays;
         string currentCategoryName;
 
-        public AnalyticsWindow()
+        public AnalyticsWindow(int? number)
         {
+            if (number == null)
+            {
+                nDays = -7;
+            }
+            else
+            {
+                nDays = -(int)number;
+            }
+            
             InitializeComponent();
 
             using (Context context = new Context())
@@ -34,6 +47,29 @@ namespace TheBestTracker.UserInterface
                 //colorsListBox.ItemsSource = context.Category.ToList();
             }
         }
+
+        public static List<KeyValuePair<string, int>> DataCharts()
+        {
+            List<KeyValuePair<string, int>> sourceList = new List<KeyValuePair<string, int>>();
+            int currentCategoryHours = 0;
+            using (Context context = new Context())
+            {
+                foreach (var entryCategory in context.Category)
+                {
+                    currentCategoryHours = 0;
+                    foreach (var entryCategoryTime in context.CategoryTime)
+                    {
+                        if (entryCategoryTime.CategoryName == entryCategory.Name)
+                        {
+                            currentCategoryHours++;
+                        }
+                    }
+                    sourceList.Add(new KeyValuePair<string, int>(entryCategory.Name, currentCategoryHours));
+                }
+            }
+            return sourceList;
+        }
+
 
         private void CategoryTextBlock_Initialized(object sender, EventArgs e)
         {
@@ -70,64 +106,161 @@ namespace TheBestTracker.UserInterface
             TextBlock allHoursTextBlock = sender as TextBlock;
             string s = string.Format("{0,-10}", currentAllHours);
             //Category category = allHoursTextBlock.DataContext as Category;
-            allHoursTextBlock.Text = s;
+            allHoursTextBlock.Text = fiveDigits(s);
 
         }
 
-        private string GetString(int days)
-        {
-            int currentHours = 0;
-            DateTime weekAgo = DateTime.Now.Date.AddDays(days);
-            using (Context context = new Context())
-            {
-                foreach (var entry in context.CategoryTime)
-                {
-                    if (entry.CategoryName == currentCategoryName && entry.Date.Date > weekAgo)
-                    {
-                        currentHours++;
-                    }
-                }
-            }
-            string s = string.Format("{0,-10}", currentHours);
-            return s;
-        }
-
-        private void weekHoursTextBlock_Initialized(object sender, EventArgs e)
+        private void periodHoursTextBlock_Initialized(object sender, EventArgs e)
         {            
             TextBlock weekHoursTextBlock = sender as TextBlock;
-            weekHoursTextBlock.Text = GetString(-7);
+            weekHoursTextBlock.Text = fiveDigits(WeekMonthYearAnalytics.GetString(nDays, currentCategoryName));
         }
 
-        private void monthHoursTextBlock_Initialized(object sender, EventArgs e)
+        private void deltaTextBlock_Initialized(object sender, EventArgs e)
         {
-            TextBlock monthHoursTextBlock = sender as TextBlock;
-            monthHoursTextBlock.Text = GetString(-30);
+            TextBlock weekHoursTextBlock = sender as TextBlock;
+            weekHoursTextBlock.Text = WeekMonthYearAnalytics.GetDelta(nDays, currentCategoryName);
         }
 
         private void percentTextBlock_Initialized(object sender, EventArgs e)
         {
-            int allHours = 0;
-            int currentAllHours = 0;
-            using (Context context = new Context())
-            {
-                foreach (var entry in context.CategoryTime)
-                {
-                    allHours++;
-                    if (entry.CategoryName == currentCategoryName)
-                    {
-                        currentAllHours++;
-                    }
-                }
-            }
+            int allHours = WeekMonthYearAnalytics.AllHours(nDays);
+            int currentAllHours = int.Parse(WeekMonthYearAnalytics.GetString(nDays, currentCategoryName));
+
             TextBlock percentTextBlock = sender as TextBlock;
-            string s = string.Format("{0,-10:P1}", (double)currentAllHours / allHours);
-            percentTextBlock.Text = s;
+            string s = string.Format("{0,-10:P1}", (double)currentAllHours/ allHours);
+            percentTextBlock.Text = fiveDigits(s);
         }
 
-        private void yearHoursTextBlock_Initialized(object sender, EventArgs e)
+        private void prodTextBlock_Initialized(object sender, EventArgs e)
         {
             TextBlock yearHoursTextBlock = sender as TextBlock;
-            yearHoursTextBlock.Text = GetString(-365);
+            yearHoursTextBlock.Text = WeekMonthYearAnalytics.GetProdictivity(nDays, currentCategoryName);
+            
+        }
+
+        private void passAmountInitialized(object sender, EventArgs e)
+        {
+            TextBox passAmount = sender as TextBox;
+            passAmount.Text = (-nDays).ToString();
+        }
+
+        
+        private string fiveDigits(string str)
+        {
+            if (str.Length == 1)
+            {
+                return "  " + str + "  ";
+            }
+            else if (str.Length == 3)
+            {
+                return "  " + str + "  ";
+            }
+            else if (str.Length == 4)
+            {
+                return str + "  ";
+            }
+            else if (str.Length == 2)
+            {
+                return " " + str + "  ";
+            }
+            else return str;
+        }
+
+
+        private void okClick(object sender, RoutedEventArgs e)
+        {
+            string number = PassAmount.Text;
+            if (number.Length != 0)
+            {
+                if(WeekMonthYearAnalytics.OneInteger(number) == true)
+                {
+                    AnalyticsWindow analyticsWindow = new AnalyticsWindow(int.Parse(PassAmount.Text));
+                    analyticsWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    NeedInteger Message = new NeedInteger();
+                    Message.Show();
+                }
+            }
+        }
+
+
+        private void addEventClick(object sender, RoutedEventArgs e)
+        {
+            CreateEventWindow сreateEventWindow = new CreateEventWindow(null);
+            сreateEventWindow.Show();
+            this.Close();
+        }
+
+        private void showAnalytics_Click(object sender, RoutedEventArgs e)
+        {
+            AnalyticsWindow analyticsWindow = new AnalyticsWindow(nDays);
+            analyticsWindow.Show();
+            this.Close();
+        }
+
+        private void settingsClick(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.Show();
+            this.Close();
+        }
+
+        private void homeClick(object sender, RoutedEventArgs e)
+        {
+            SeeTheWeekV2 see = new SeeTheWeekV2();
+            see.Show();
+            this.Close();
+        }
+
+        private void exitClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void showWeekClick(object sender, RoutedEventArgs e)
+        {
+            WeekAnalytics see = new WeekAnalytics("Week", DateTime.Now);
+            see.Show();
+            this.Close();
+        }
+
+        private void showMonthClick(object sender, RoutedEventArgs e)
+        {
+            WeekAnalytics see = new WeekAnalytics("Month", DateTime.Now);
+            see.Show();
+            this.Close();
+        }
+
+        private void showDayClick(object sender, RoutedEventArgs e)
+        {
+            WeekAnalytics see = new WeekAnalytics("Day", DateTime.Now);
+            see.Show();
+            this.Close();
+        }
+
+        private void showYearClick(object sender, RoutedEventArgs e)
+        {
+            WeekAnalytics see = new WeekAnalytics("Year", DateTime.Now);
+            see.Show();
+            this.Close();
+        }
+
+        private void pieChartClick(object sender, RoutedEventArgs e)
+        {
+            PieChartWindow pieChartWindow = new PieChartWindow();
+            pieChartWindow.Show();
+            this.Close();
+        }
+
+        private void columnChartClick(object sender, RoutedEventArgs e)
+        {
+            ColumnChartWindow columnChartWindow = new ColumnChartWindow();
+            columnChartWindow.Show();
+            this.Close();
         }
     }
 }

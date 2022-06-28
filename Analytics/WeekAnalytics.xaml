@@ -1,17 +1,17 @@
-﻿<Window x:Class="TheBestTracker.UserInterface.AnalyticsWindow"
+﻿<Window x:Class="TheBestTracker.UserInterface.Analytics.WeekAnalytics"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TheBestTracker.UserInterface"
+        xmlns:local="clr-namespace:TheBestTracker.UserInterface.Analytics"
         mc:Ignorable="d"
-        Height="635" Width="970">
+     Height="635" Width="970">
     <Grid Background="#32373c">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition/>
-           
-            
+
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -26,42 +26,23 @@
                     FontSize="15" FontFamily="Verdana" Foreground ="White"/>
         <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Period" Margin="374,5,0,0"
                     FontSize="15" FontFamily="Verdana" Foreground ="White"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Delta" Margin="465,5,0,0"
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Delta" Margin="460,5,0,0"
                     FontSize="15" FontFamily="Verdana" Foreground ="White"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Productivity" Margin="530,5,0,0"
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Prod" Margin="555,5,0,0"
                     FontSize="15" FontFamily="Verdana" Foreground ="White"/>
-        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Percent" Margin="645,5,0,0"
+        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="Percent" Margin="647,5,0,0"
                     FontSize="15" FontFamily="Verdana" Foreground ="White"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Type in the number" Margin="30,0,0,10"
-                    FontSize="16" FontFamily="Verdana" Foreground ="White"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="of days to analze" Margin="40,20,0,0"
-                    FontSize="16" FontFamily="Verdana" Foreground ="White"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Type in the number" Margin="35,0,0,10"
+                    FontSize="15" FontFamily="Verdana" Foreground ="White"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="of days to analze" Margin="43,20,0,0"
+                    FontSize="15" FontFamily="Verdana" Foreground ="White"/>
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Or choose a period" Margin="30,130,0,10"
-                    FontSize="16" FontFamily="Verdana" Foreground ="White"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="to analyze here" Margin="45,150,0,0"
-                    FontSize="16" FontFamily="Verdana" Foreground ="White"/>
-        
 
-        <TextBox x:Name="PassAmount" Text="7" Height="35" Width="120" Grid.Row="2" Grid.Column="0" 
-                 HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" FontSize="18" Margin="20,50,60,0" Initialized="passAmountInitialized">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="3"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
+        <DatePicker Name="datePicker" HorizontalAlignment="Center"
+                           VerticalAlignment="Top" Grid.Row="2" Grid.Column="0" Height="25" Width="140" 
+                   Margin="0,50,0,20" SelectedDateChanged="datePicker_SelectedDateChanged" IsEnabled="True" FontFamily="Verdana" FontSize="15"/>
 
-        <Button Name="ok" Width="50" Height="35" Click="okClick" Background="#00bbd3"
-                Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="14"
-                VerticalAlignment="Top" Margin="140, 50, 0, 0" FontFamily="Verdana" Content="Ok">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-        </Button>
 
 
         <ListBox Name="categoryListBox" Margin="10, 0, 10, 10" Background="#141618" Grid.Column="1" Grid.RowSpan="2" Grid.Row="2">
@@ -167,7 +148,7 @@
         </Button>
 
         <Button Name="showWeek" Content="Week" Width="65" Height="40" Click="showWeekClick" Background="#00bbd3" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100, 180, 0, 0" FontFamily="Verdana">
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100, 180, 0, 0" FontFamily="Verdana" Initialized="weekClickInitialized">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -176,7 +157,7 @@
         </Button>
 
         <Button Name="showMonth" Content="Month" Width="65" Height="40" Click="showMonthClick" Background="#00bbd3" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 240, 80, 0" FontFamily="Verdana">
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 240, 80, 0" FontFamily="Verdana" Initialized="monthClickInitialized">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -184,8 +165,8 @@
             </Button.Resources>
         </Button>
 
-        <Button Name="showDay" Content="Day" Width="65" Height="40" Click="showDayClick" Background="#00bbd3" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 180, 80, 0" FontFamily="Verdana">
+        <Button Name="showDay" Content="Today" Width="65" Height="40" Click="showDayClick" Background="#00bbd3" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="15"
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0, 180, 80, 0" FontFamily="Verdana" Initialized="dayClickInitialized">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -194,44 +175,12 @@
         </Button>
 
         <Button Name="showYear" Content="Year" Width="65" Height="40" Click="showYearClick" Background="#00bbd3" Grid.Column="0" Grid.Row="2" Foreground="White" FontSize="15"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100, 240, 0, 0" FontFamily="Verdana">
+                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100, 240, 0, 0" FontFamily="Verdana" Initialized="yearClickInitialized">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </Button.Resources>
-        </Button>
-
-
-        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="Show Charts" Margin="30, 320, 0, 0"
-                    FontSize="15" FontFamily="Verdana" Foreground ="White"/>
-
-        <Button Name="pieChart" Width="70" Height="35" Click="pieChartClick" Background="#32373c"
-                Grid.Column="1" Grid.Row="0" Foreground="Black" FontSize="14"
-                HorizontalAlignment="Center" VerticalAlignment="Top" Margin="100, 240, 0, 0"  FontFamily="Verdana">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-            <StackPanel>
-                <Image Source="Charts/ChartsImg/pieChart.png" Height="34"  Margin="0, -1, 0, 0"/>
-                <TextBlock Text="Analytics"/>
-            </StackPanel>
-        </Button>
-
-        <Button Name="columnChart" Width="70" Height="35" Click="columnChartClick" Background="#00bbd3" HorizontalAlignment="Center"
-                Grid.Column="1" Grid.Row="0" Foreground="Black" FontSize="14"
-                VerticalAlignment="Top" Margin="0, 180, 80, 0" FontFamily="Verdana">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </Button.Resources>
-            <StackPanel>
-                <Image Source="Charts/ChartsImg/columnChart.png" Height="34"  Margin="0, -1, 0, 0"/> 
-                <TextBlock Text="Exit"/>
-            </StackPanel>
         </Button>
 
     </Grid>
