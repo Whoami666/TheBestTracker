@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetProjects.DataVisualization.Toolkit, Version=6.1.94.0, Culture=neutral, PublicKeyToken=79778c5f2eed289b, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetProjects.WpfToolkit.DataVisualization.6.1.94\lib\net40\DotNetProjects.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -114,11 +117,35 @@
     <Compile Include="UserInterface\Analytics\AnalyticsWindow.xaml.cs">
       <DependentUpon>AnalyticsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserInterface\Analytics\Charts\ColumnChartPeriodWindow.xaml.cs">
+      <DependentUpon>ColumnChartPeriodWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Analytics\Charts\ColumnChartWindow.xaml.cs">
+      <DependentUpon>ColumnChartWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Analytics\Charts\PieChartPeriodWindow.xaml.cs">
+      <DependentUpon>PieChartPeriodWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\Analytics\Charts\PieChartWindow.xaml.cs">
+      <DependentUpon>PieChartWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserInterface\Analytics\WeekAnalytics.xaml.cs">
       <DependentUpon>WeekAnalytics.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\CreateEventWindow.xaml.cs">
       <DependentUpon>CreateEventWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\MessageBoxes\NeedInteger.xaml.cs">
+      <DependentUpon>NeedInteger.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\MessageBoxes\OkMessageBox.xaml.cs">
+      <DependentUpon>OkMessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\MessageBoxes\TimeBlockAdded1.xaml.cs">
+      <DependentUpon>TimeBlockAdded1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\MessageBoxes\TimeBlockAddedMany.xaml.cs">
+      <DependentUpon>TimeBlockAddedMany.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\MessageBoxes\WeekMB.xaml.cs">
       <DependentUpon>WeekMB.xaml</DependentUpon>
@@ -129,14 +156,8 @@
     <Compile Include="UserInterface\SeeTheWeekV2.xaml.cs">
       <DependentUpon>SeeTheWeekV2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserInterface\SeeThe\SeeTheMonth.xaml.cs">
-      <DependentUpon>SeeTheMonth.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserInterface\SeeThe\SeeTheMonthV3.xaml.cs">
       <DependentUpon>SeeTheMonthV3.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserInterface\Settings - Копировать.xaml.cs">
-      <DependentUpon>Settings - Копировать.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -157,11 +178,43 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserInterface\Analytics\Charts\ColumnChartPeriodWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\Analytics\Charts\ColumnChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\Analytics\Charts\PieChartPeriodWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\Analytics\Charts\PieChartWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserInterface\Analytics\WeekAnalytics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserInterface\CreateEventWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\MessageBoxes\NeedInteger.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\MessageBoxes\OkMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\MessageBoxes\TimeBlockAdded1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInterface\MessageBoxes\TimeBlockAddedMany.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -177,17 +230,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserInterface\SeeThe\SeeTheMonth.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserInterface\SeeThe\SeeTheMonthV3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserInterface\Settings - Копировать.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserInterface\SettingsWindow.xaml">
       <SubType>Designer</SubType>
@@ -274,6 +319,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="UserInterface\Images\settingsClicked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="UserInterface\Analytics\Charts\ChartsImg\columnChart.png" />
+    <Resource Include="UserInterface\Analytics\Charts\ChartsImg\columnChartClicked.png" />
+    <Resource Include="UserInterface\Analytics\Charts\ChartsImg\pieChart.png" />
+    <Resource Include="UserInterface\Analytics\Charts\ChartsImg\pieChartClicked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
