@@ -27,16 +27,9 @@ namespace TheBestTracker
         {
             InitializeComponent();
             InitializeData();
-          //  NothingSettings сreateEventWindow = new NothingSettings();
-            //AnalyticsWindow сreateEventWindow = new AnalyticsWindow();
-            //   CreateEventWindow сreateEventWindow = new CreateEventWindow();
-            //   SettingsWindow сreateEventWindow = new SettingsWindow();
-            //  SeeTheCalendar сreateEventWindow = new SeeTheCalendar();
-            //  SeeTheMonthV3 сreateEventWindow = new SeeTheMonthV3();
 
             SeeTheWeekV2 сreateEventWindow = new SeeTheWeekV2();
             сreateEventWindow.Show();
-            //  сreateEventWindow.Show();
             this.Close();
         }
 
